@@ -1,0 +1,17 @@
+services:
+  explorer:
+    build: .
+    init: true
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      DATABASE_PATH: /app/data/bikemi.sqlite
+      BIKEMI_SESSION_DIR: /app/data/bikemi_sessions
+    ports:
+      - "127.0.0.1:3000:3000"
+    shm_size: 1gb
+    volumes:
+      - bikemi_data:/app/data
+volumes:
+  bikemi_data:
